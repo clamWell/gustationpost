@@ -20,9 +20,39 @@ $(function(){
 	})
 
 
+	var userPutMsg = "";
+	function setPostDefault(){
+		$(".user-made-post").hide();
+		$(".user-made-post").addClass("user-made-post-scale");	
+	}
+	setPostDefault();
+
+	function makePost(msg){
+		if(msg.length >= 40){
+			$(".alertMsg").fadeIn();
+		}else{
+			$(".alertMsg").hide();
+			$(".text-input .input-bar").addClass("input-bar-block");
+			$(".user-made-post .post-msg p").html(userPutMsg);
+			$(".user-made-post").fadeIn();
+			$(".user-made-post").removeClass("user-made-post-scale");
+			var topMoveVal = ($(".user-made-post").height()-$(".user-made-post .post-msg p").outerHeight())/2;
+			$(".user-made-post .post-msg p").css({"top":topMoveVal+"px"});
+			$(".user-made-post .post-msg p").animate({"opacity":"1"},500);  
+	}
+	
+	};
+	$("#USER_POST_CONFIRM").on("click", function(e){
+		e.preventDefault();
+		userPutMsg = $("#USER_POST").val();
+		makePost(userPutMsg);
+	});
+
+
 	/******** 모바일 전용 조정 ********/
 	if(isMobile==true){
 		$(".page-title-img").find("img").attr("src", "img/page-title-img-m.png");
+		$(".back-post-holder").insertAfter(".intro-front");
 	
 	}
 	/******** 모바일 전용 조정 ********/
@@ -31,8 +61,6 @@ $(function(){
 		for(o=0; o<$introItem.length;o++){
 			$introItem.eq(o).delay(o*500).animate({"opacity":"1", "filter":"none","-webkit-filter":"none"}, 1500);
 		};
-			
-	
 	}
 
 	$(".loading-page").fadeOut(200, function(){
