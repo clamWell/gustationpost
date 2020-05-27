@@ -51,7 +51,7 @@ $(function(){
 
 	/******** 모바일 전용 조정 ********/
 	if(isMobile==true){
-		$(".page-title-img").find("img").attr("src", "img/page-title-img-m.png");
+		//$(".page-title-img").find("img").attr("src", imgURL + "page-title-full-m.png");
 		$(".back-post-holder").insertAfter(".intro-front");
 	
 	}
